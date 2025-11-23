@@ -1,21 +1,24 @@
 #include "Fixed.hpp"
-#include <iostream>
-#include <climits>
 
 Fixed::Fixed(void) : value(0) {
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int n) : value(n * (1 << fractionalBits)) {
+	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float f) : value(roundf(f * (1 << fractionalBits))) {
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& other) {
+	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
+	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other) {
 		value = other.getRawBits();
 	}
@@ -23,6 +26,7 @@ Fixed& Fixed::operator=(const Fixed& other) {
 }
 
 Fixed::~Fixed(void) {
+	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits(void) const {
@@ -86,11 +90,6 @@ Fixed Fixed::operator*(const Fixed& other) const {
 
 Fixed Fixed::operator/(const Fixed& other) const {
 	Fixed result;
-	if (other.value == 0) {
-		std::cout << "Error: Division by zero!" << std::endl;
-		result.setRawBits(0);
-		return result;
-	}
 	long long temp = (long long)value * (1 << fractionalBits);
 	result.setRawBits((int)(temp / other.value));
 	return result;
