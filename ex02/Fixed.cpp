@@ -5,27 +5,10 @@
 Fixed::Fixed(void) : value(0) {
 }
 
-Fixed::Fixed(const int n) {
-	int maxSafeValue = INT_MAX / (1 << fractionalBits);
-	int minSafeValue = INT_MIN / (1 << fractionalBits);
-	
-	if (n > maxSafeValue)
-		value = INT_MAX;
-	else if (n < minSafeValue)
-		value = INT_MIN;
-	else
-		value = n * (1 << fractionalBits);
+Fixed::Fixed(const int n) : value(n * (1 << fractionalBits)) {
 }
 
-Fixed::Fixed(const float f) {
-	float scaledValue = f * (1 << fractionalBits);
-	
-	if (scaledValue > INT_MAX)
-		value = INT_MAX;
-	else if (scaledValue < INT_MIN)
-		value = INT_MIN;
-	else
-		value = roundf(scaledValue);
+Fixed::Fixed(const float f) : value(roundf(f * (1 << fractionalBits))) {
 }
 
 Fixed::Fixed(const Fixed& other) {
@@ -84,41 +67,20 @@ bool Fixed::operator!=(const Fixed& other) const {
 
 Fixed Fixed::operator+(const Fixed& other) const {
 	Fixed result;
-	long long temp = (long long)value + (long long)other.value;
-	
-	if (temp > INT_MAX)
-		result.setRawBits(INT_MAX);
-	else if (temp < INT_MIN)
-		result.setRawBits(INT_MIN);
-	else
-		result.setRawBits((int)temp);
+	result.setRawBits(value + other.value);
 	return result;
 }
 
 Fixed Fixed::operator-(const Fixed& other) const {
 	Fixed result;
-	long long temp = (long long)value - (long long)other.value;
-	
-	if (temp > INT_MAX)
-		result.setRawBits(INT_MAX);
-	else if (temp < INT_MIN)
-		result.setRawBits(INT_MIN);
-	else
-		result.setRawBits((int)temp);
+	result.setRawBits(value - other.value);
 	return result;
 }
 
 Fixed Fixed::operator*(const Fixed& other) const {
 	Fixed result;
-	long long temp = (long long)value * (long long)other.value;
-	temp /= (1 << fractionalBits);
-	
-	if (temp > INT_MAX)
-		result.setRawBits(INT_MAX);
-	else if (temp < INT_MIN)
-		result.setRawBits(INT_MIN);
-	else
-		result.setRawBits((int)temp);
+	long long temp = (long long)value * other.value;
+	result.setRawBits((int)(temp / (1 << fractionalBits)));
 	return result;
 }
 
@@ -129,16 +91,8 @@ Fixed Fixed::operator/(const Fixed& other) const {
 		result.setRawBits(0);
 		return result;
 	}
-
 	long long temp = (long long)value * (1 << fractionalBits);
-	temp /= other.value;
-	
-	if (temp > INT_MAX)
-		result.setRawBits(INT_MAX);
-	else if (temp < INT_MIN)
-		result.setRawBits(INT_MIN);
-	else
-		result.setRawBits((int)temp);
+	result.setRawBits((int)(temp / other.value));
 	return result;
 }
 

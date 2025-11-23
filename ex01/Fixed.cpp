@@ -6,31 +6,12 @@ Fixed::Fixed(void) : value(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int n) {
+Fixed::Fixed(const int n) : value(n * (1 << fractionalBits)) {
 	std::cout << "Int constructor called" << std::endl;
-	
-	int maxSafeValue = INT_MAX / (1 << fractionalBits);
-	int minSafeValue = INT_MIN / (1 << fractionalBits);
-	
-	if (n > maxSafeValue)
-		value = INT_MAX;
-	else if (n < minSafeValue)
-		value = INT_MIN;
-	else
-		value = n * (1 << fractionalBits);
 }
 
-Fixed::Fixed(const float f) {
+Fixed::Fixed(const float f) : value(roundf(f * (1 << fractionalBits))) {
 	std::cout << "Float constructor called" << std::endl;
-	
-	float scaledValue = f * (1 << fractionalBits);
-	
-	if (scaledValue > INT_MAX)
-		value = INT_MAX;
-	else if (scaledValue < INT_MIN)
-		value = INT_MIN;
-	else
-		value = roundf(scaledValue);
 }
 
 Fixed::Fixed(const Fixed& other) {
