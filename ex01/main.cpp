@@ -64,7 +64,7 @@ int main(void) {
 	}
 	{
 		std::cout << "\n--- Testing boundary values (float limits) ---" << std::endl;
-		showFixed(8388607.4999999999999999999999999f);
+		showFixed(8388607.5f);
 		showFixed(-8388608.f);
 	}
 	return 0;

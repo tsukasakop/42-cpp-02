@@ -31,7 +31,7 @@ int main(void) {
 	}
 	{
 		std::cout << "\n--- Arithmetic Operations ---" << std::endl;
-		Fixed lhs(-8388608.f), rhs(8388608.f);
+		Fixed lhs(-12.5f), rhs(2);
 		std::cout << "\nOperands:" << std::endl;
 		showFixed(lhs);
 		showFixed(rhs);
