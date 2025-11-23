@@ -2,6 +2,9 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
+# include <climits>
+# include <stdexcept>
 
 class Fixed {
 private:
@@ -21,7 +24,6 @@ public:
 	float toFloat(void) const;
 	int toInt(void) const;
 	
-	// 比較演算子
 	bool operator>(const Fixed& other) const;
 	bool operator<(const Fixed& other) const;
 	bool operator>=(const Fixed& other) const;
@@ -29,19 +31,16 @@ public:
 	bool operator==(const Fixed& other) const;
 	bool operator!=(const Fixed& other) const;
 	
-	// 算術演算子
 	Fixed operator+(const Fixed& other) const;
 	Fixed operator-(const Fixed& other) const;
 	Fixed operator*(const Fixed& other) const;
 	Fixed operator/(const Fixed& other) const;
 	
-	// インクリメント/デクリメント演算子
-	Fixed& operator++(void);      // 前置インクリメント
-	Fixed operator++(int);         // 後置インクリメント
-	Fixed& operator--(void);      // 前置デクリメント
-	Fixed operator--(int);         // 後置デクリメント
-	
-	// 静的メンバ関数
+	Fixed& operator++(void);
+	Fixed operator++(int);
+	Fixed& operator--(void);
+	Fixed operator--(int);
+
 	static Fixed& min(Fixed& a, Fixed& b);
 	static const Fixed& min(const Fixed& a, const Fixed& b);
 	static Fixed& max(Fixed& a, Fixed& b);

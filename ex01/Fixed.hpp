@@ -2,6 +2,9 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
+# include <climits>
+# include <stdexcept>
 
 class Fixed {
 private:
