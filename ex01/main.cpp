@@ -52,8 +52,8 @@ int main(void) {
 	{
 		std::cout << "\n--- Testing boundary values (exact limits) ---" << std::endl;
 		Fixed fixedMax, fixedMin;
-		fixedMax.setRawBits(0b01111111111111111111111111111111);
-		fixedMin.setRawBits(0b10000000000000000000000000000000);
+		fixedMax.setRawBits(INT_MAX);
+		fixedMin.setRawBits(INT_MIN);
 		showFixed(fixedMax);
 		showFixed(fixedMin);
 	}
