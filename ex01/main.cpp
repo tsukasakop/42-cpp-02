@@ -2,13 +2,15 @@
 #include <climits>
 #include <iomanip>
 #include <bitset>
+#include <typeinfo>
 
 template <typename T>
 static void showFixed(const T& arg) {
 	Fixed f(arg);
 	const int width = 12;
+	std::cout << std::setprecision(10);
 	std::cout << std::setw(width) << std::left << "arg" << ": " << arg << " (" << typeid(arg).name() << ")" << std::endl;
-	std::cout << std::setw(width) << std::left << "value" << ": " << std::setprecision(10) << f << std::endl;
+	std::cout << std::setw(width) << std::left << "value" << ": " << f << std::endl;
 	std::cout << std::setw(width) << std::left << "toInteger()" << ": " << f.toInt() << std::endl;
 	std::cout << std::setw(width) << std::left << "getRawBits()" << ": " << std::bitset<32>(f.getRawBits()) << std::endl;
 }
@@ -44,8 +46,8 @@ int main(void) {
 	}
 	{
 		std::cout << "\n--- Testing small fractional values ---" << std::endl;
-		showFixed(0.00390625f); // 1 / 256
-		showFixed(-0.00390625f); // -1 / 256
+		showFixed(0.00390625f);
+		showFixed(-0.00390625f);
 	}
 	{
 		std::cout << "\n--- Testing boundary values (exact limits) ---" << std::endl;

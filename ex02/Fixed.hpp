@@ -3,8 +3,6 @@
 
 # include <iostream>
 # include <cmath>
-# include <climits>
-# include <stdexcept>
 
 class Fixed {
 private:

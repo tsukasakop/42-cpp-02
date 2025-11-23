@@ -4,7 +4,8 @@
 
 static void showFixed(const Fixed& f) {
 	const int width = 12;
-	std::cout << std::setw(width) << std::left << "value" << ": " << std::setprecision(10) << f << std::endl;
+	std::cout << std::setprecision(10);
+	std::cout << std::setw(width) << std::left << "value" << ": " << f << std::endl;
 	std::cout << std::setw(width) << std::left << "toInteger()" << ": " << f.toInt() << std::endl;
 	std::cout << std::setw(width) << std::left << "getRawBits()" << ": 0b" << std::bitset<32>(f.getRawBits()) << std::endl;
 }
